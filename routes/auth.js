@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const  BoardingProvider  = require('../model/BoardingProvider');
-const {registerValidation } = require('../routes/validation');
-const Joi = require('@hapi/joi');
+const bcrypt = require('bcryptjs');
+
 
 router.post('/register',async (req,res) =>{
 
@@ -11,15 +11,20 @@ router.post('/register',async (req,res) =>{
     // if(error)
     //     return res.status(400).send(error.details[0].message)
 
-   // checking if the user alrady in database
+   // checking if the user already in database
     const  emailExist = await BoardingProvider.findOne({email:req.body.email});
     if(emailExist) return res.status(400).send('Email is already exits');
+
+    // Hash Passwords
+    const  salt = await bcrypt.genSalt(10);
+
+    const  hashPassword = await bcrypt.hash(req.body.password,salt)
 
     const  boardingProvider = new BoardingProvider({
         username:req.body.username,
         fullName:req.body.fullName,
         email:req.body.email,
-        password:req.body.password
+        password:hashPassword
     })
     try {
         const  savedUser = await  boardingProvider.save();
@@ -31,6 +36,23 @@ router.post('/register',async (req,res) =>{
 
     }
 });
+
+router.post('/login',async (req,res) =>{
+    const  user = await BoardingProvider.findOne({email:req.body.email});
+    if(!user) return res.status(400).send('Email is not found');
+
+    //Password is incorrect
+    const validPass = await  bcrypt.compare(req.body.password,user.password);
+    if(!validPass) return  res.status(400).send('invalid password');
+
+
+
+
+
+
+
+
+})
 
 
 module.exports=router;
