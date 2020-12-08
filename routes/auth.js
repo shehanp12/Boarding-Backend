@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const  BoardingProvider  = require('../model/BoardingProvider');
 const bcrypt = require('bcryptjs');
+ const jwt = require('jsonwebtoken');
 
 
 router.post('/register',async (req,res) =>{
@@ -44,6 +45,14 @@ router.post('/login',async (req,res) =>{
     //Password is incorrect
     const validPass = await  bcrypt.compare(req.body.password,user.password);
     if(!validPass) return  res.status(400).send('invalid password');
+
+    // res.send('Logged In')
+
+   // Create and assign web tokens
+    const token = jwt.sign({_id:user._id},process.env.TOKEN_SECRET);
+    res.header('auth-token',token).send(token);
+
+
 
 
 
