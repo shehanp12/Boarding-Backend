@@ -24,6 +24,7 @@ router.post('/register',async (req,res) =>{
         const  hashPassword = await bcrypt.hash(req.body.password,salt)
 
         const  boardingProvider = new BoardingProvider({
+            uid:req.body.uid,
             username:req.body.username,
             fullName:req.body.fullName,
             email:req.body.email,
@@ -55,11 +56,11 @@ router.post('/login',async (req,res) =>{
         const validPass = await  bcrypt.compare(req.body.password,user.password);
         if(!validPass) return  res.status(400).send('invalid password');
 
-        // res.send('Logged In')
+        res.send('Logged In')
 
         // Create and assign web tokens
         const token = jwt.sign({_id:user._id},process.env.TOKEN_SECRET);
-        res.header('auth-token',token).send(token);
+        // res.header('auth-token',token).send(token);
 
 
     }catch (e) {
