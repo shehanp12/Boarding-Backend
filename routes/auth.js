@@ -26,15 +26,8 @@ router.post('/register',async (req,res) =>{
             email:req.body.email,
             password:hashPassword
         })
-        // try {
-        //     const  savedUser = await  boardingProvider.save();
-        //     res.send(savedUser)
-        //
-        // }
-        // catch (e) {
-        //     res.send(400).send(e)
-        //
-        // }
+
+
 
         boardingProvider.save(function (err,boardingProvider){
             if(err){
