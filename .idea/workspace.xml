@@ -89,7 +89,7 @@
       <workItem from="1607663686656" duration="5358000" />
       <workItem from="1607686644848" duration="2476000" />
       <workItem from="1607715983028" duration="418000" />
-      <workItem from="1607716930741" duration="7140000" />
+      <workItem from="1607716930741" duration="8452000" />
     </task>
     <task id="LOCAL-00001" summary="mongooose">
       <created>1607358571087</created>
@@ -147,7 +147,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607724349072</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="authentcation">
+      <created>1607726902654</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1607726902654</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,15 +181,5 @@
     <MESSAGE value="commit" />
     <MESSAGE value="authentcation" />
     <option name="LAST_COMMIT_MESSAGE" value="authentcation" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/routes/users.js</url>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

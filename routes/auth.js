@@ -9,7 +9,8 @@ router.post('/register',async (req,res) =>{
 
     if ((!req.body.username) || (!req.body.password)) {
         res.json({success: false, msg: 'Enter all fields'})
-    }else{
+    }
+    else{
 
         const  emailExist = await BoardingProvider.findOne({email:req.body.email});
         if(emailExist) return  res.json({success: false, msg: 'Email is already exits'});
@@ -50,13 +51,17 @@ router.post('/register',async (req,res) =>{
 
 router.post('/login',async (req,res) =>{
 
-    try{
+    if ((!req.body.username) || (!req.body.password)) {
+        res.json({success: false, msg: 'Enter all fields'})
+    }
+    else{
+
         const  user = await BoardingProvider.findOne({email:req.body.email});
-        if(!user) return res.status(400).send('Email is not found');
+        if(!user) return  res.json({success: false, msg: 'Email is not found'}) ;
 
         //Password is incorrect
         const validPass = await  bcrypt.compare(req.body.password,user.password);
-        if(!validPass) return  res.status(400).send('invalid password');
+        if(!validPass) return  res.json({success: false, msg: 'Password is in correct'}) ;
 
         res.send('Logged In')
 
@@ -64,10 +69,11 @@ router.post('/login',async (req,res) =>{
         const token = jwt.sign({_id:user._id},process.env.TOKEN_SECRET);
         // res.header('auth-token',token).send(token);
 
-
-    }catch (e) {
-        console.log('hello')
     }
+
+
+
+
 
 
 
