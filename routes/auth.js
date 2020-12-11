@@ -12,7 +12,7 @@ router.post('/register',async (req,res) =>{
     }else{
 
         const  emailExist = await BoardingProvider.findOne({email:req.body.email});
-        if(emailExist) return res.status(400).send('Email is already exits');
+        if(emailExist) return  res.json({success: false, msg: 'Email is already exits'});
 
         // Hash Passwords
         const  salt = await bcrypt.genSalt(10);
