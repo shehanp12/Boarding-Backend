@@ -7,13 +7,9 @@ const bcrypt = require('bcryptjs');
 
 router.post('/register',async (req,res) =>{
 
-    //validation
-    // const {error} = registerValidation(req.body);
-    // if(error)
-    //     return res.status(400).send(error.details[0].message)
-
-   // checking if the user already in database
-    try{
+    if ((!req.body.username) || (!req.body.password)) {
+        res.json({success: false, msg: 'Enter all fields'})
+    }else{
 
         const  emailExist = await BoardingProvider.findOne({email:req.body.email});
         if(emailExist) return res.status(400).send('Email is already exits');
@@ -24,25 +20,38 @@ router.post('/register',async (req,res) =>{
         const  hashPassword = await bcrypt.hash(req.body.password,salt)
 
         const  boardingProvider = new BoardingProvider({
-            uid:req.body.uid,
+
             username:req.body.username,
             fullName:req.body.fullName,
             email:req.body.email,
             password:hashPassword
         })
-        try {
-            const  savedUser = await  boardingProvider.save();
-            res.send(savedUser)
+        // try {
+        //     const  savedUser = await  boardingProvider.save();
+        //     res.send(savedUser)
+        //
+        // }
+        // catch (e) {
+        //     res.send(400).send(e)
+        //
+        // }
 
-        }
-        catch (e) {
-            res.send(400).send(e)
+        boardingProvider.save(function (err,boardingProvider){
+            if(err){
+                res.json({success: false, msg: 'Failed to save'})
+            }
+            else {
+                res.json({success: true, msg: 'Successfully saved'})
+            }
+        })
 
-        }
-
-    }catch (e) {
-        console.log('hello ');
     }
+
+
+
+
+
+
 
 });
 
