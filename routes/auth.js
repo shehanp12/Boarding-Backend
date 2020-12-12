@@ -51,7 +51,7 @@ router.post('/register',async (req,res) =>{
 
 router.post('/login',async (req,res) =>{
 
-    if ((!req.body.username) || (!req.body.password)) {
+    if ((!req.body.email) || (!req.body.password)) {
         res.json({success: false, msg: 'Enter all fields'})
     }
     else{
@@ -61,13 +61,13 @@ router.post('/login',async (req,res) =>{
 
         //Password is incorrect
         const validPass = await  bcrypt.compare(req.body.password,user.password);
-        if(!validPass) return  res.json({success: false, msg: 'Password is in correct'}) ;
+        if(!validPass) return  res.json({success: false, msg: 'Password is incorrect'}) ;
 
-        res.send('Logged In')
+        // res.send('Logged In')
 
         // Create and assign web tokens
         const token = jwt.sign({_id:user._id},process.env.TOKEN_SECRET);
-        // res.header('auth-token',token).send(token);
+        res.json({success: true, token: token,msg:'User has successfully login'})
 
     }
 

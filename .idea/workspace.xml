@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bdb4217f-aa95-4c56-83d4-24c6cc052ab6" name="Default Changelist" comment="authentcation">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/auth.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -90,6 +91,8 @@
       <workItem from="1607686644848" duration="2476000" />
       <workItem from="1607715983028" duration="418000" />
       <workItem from="1607716930741" duration="8452000" />
+      <workItem from="1607763304043" duration="989000" />
+      <workItem from="1607770850024" duration="3754000" />
     </task>
     <task id="LOCAL-00001" summary="mongooose">
       <created>1607358571087</created>
